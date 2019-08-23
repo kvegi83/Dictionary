@@ -1,0 +1,25 @@
+import json
+from difflib import get_close_matches
+data=json.load(open("C:\\Users\\RAMC\\Downloads\\pjdata.json.json"))
+def meanings(word):
+    temp=get_close_matches(word,data.keys())
+    if word in data:
+        return(data[word])
+    elif(len(temp)>0):
+        yn=input("do u mean %s ? if yes type y/Y,if no then n/N: " %temp[0])
+        if(yn.lower()=="y"):
+            return(data[temp[0]])
+        elif(yn.lower()=="n"):
+            return("Please double check your entry")
+        else:
+            return("we dint understand your entry!")
+    else:
+        return("no such word found!")
+    
+word=input("enter word : ")
+out_put=meanings(word)
+if(type(out_put)==list):
+    for i in out_put:
+        print(i)
+else:
+    print(out_put)
